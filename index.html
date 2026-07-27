@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Take Your Data Off The Internet — a working checklist</title>
+<meta name="description" content="A practical, prioritized checklist for removing your personal information from data brokers, people-search sites, and search results. Progress saves in your browser.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Take Your Data Off The Internet">
+<meta property="og:description" content="A practical, prioritized checklist for removing your personal information from data brokers and people-search sites.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<style>
+:root{
+  --bg:#fbfaf8; --surface:#fff; --surface-2:#f4f2ee; --line:#e5e1da;
+  --ink:#1c1a17; --ink-2:#5c5750; --ink-3:#8b857c;
+  --accent:#1f5f4f; --accent-soft:#e6f0ec;
+  --p1:#b4472e; --p1-soft:#fbeae5;
+  --p2:#a97614; --p2-soft:#fdf3e0;
+  --p3:#4a7c59; --p3-soft:#eaf3ec;
+  --danger:#a3341f;
+  --radius:10px;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#16150f; --surface:#1e1d17; --surface-2:#26251d; --line:#35332a;
+    --ink:#ecebe4; --ink-2:#b3afa4; --ink-3:#85806f;
+    --accent:#6cc0a4; --accent-soft:#1c2f29;
+    --p1:#e08163; --p1-soft:#2e1f19;
+    --p2:#d8ac52; --p2-soft:#2c2517;
+    --p3:#87bf96; --p3-soft:#1b2a1f;
+    --danger:#e08163;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 32%,transparent)}
+a:hover{border-bottom-color:var(--accent)}
+h1,h2,h3{line-height:1.22;letter-spacing:-.018em;margin:0}
+h2{font-size:1.6rem;font-weight:660;margin:0 0 6px}
+h3{font-size:1.08rem;font-weight:640;margin:30px 0 10px}
+p{margin:0 0 15px}
+code{font-family:var(--mono);font-size:.87em;background:var(--surface-2);padding:2px 5px;border-radius:4px;word-break:break-word}
+
+/* ---------- header ---------- */
+header.hero{padding:64px 0 30px;border-bottom:1px solid var(--line);background:var(--surface)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:16px}
+h1{font-family:var(--serif);font-size:clamp(2.1rem,6vw,3.2rem);font-weight:600;letter-spacing:-.025em;margin-bottom:16px}
+.lede{font-size:1.12rem;color:var(--ink-2);max-width:62ch;margin-bottom:0}
+
+/* ---------- nav ---------- */
+nav.sticky{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.navrow{display:flex;align-items:center;gap:18px;height:56px;overflow-x:auto;scrollbar-width:none}
+.navrow::-webkit-scrollbar{display:none}
+.navrow a{font-size:.83rem;color:var(--ink-2);white-space:nowrap;border:none;font-weight:500}
+.navrow a:hover{color:var(--ink)}
+.navspacer{flex:1;min-width:8px}
+.overall{display:flex;align-items:center;gap:9px;white-space:nowrap}
+.ring{width:26px;height:26px;flex:none;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:4}
+.ring .bg{stroke:var(--line)}
+.ring .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dasharray .45s ease}
+.overall b{font-size:.8rem;font-variant-numeric:tabular-nums;font-weight:640}
+.overall span{font-size:.76rem;color:var(--ink-3)}
+
+/* ---------- sections ---------- */
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
+.sub{color:var(--ink-2);max-width:66ch;margin-bottom:4px}
+
+/* ---------- callouts ---------- */
+.note{border-left:3px solid var(--line);padding:2px 0 2px 18px;margin:22px 0;color:var(--ink-2)}
+.note.warn{border-color:var(--p1);background:var(--p1-soft);padding:16px 18px;border-radius:0 var(--radius) var(--radius) 0}
+.note.warn strong{color:var(--p1)}
+.note.good{border-color:var(--p3);background:var(--p3-soft);padding:16px 18px;border-radius:0 var(--radius) var(--radius) 0}
+.note.good strong{color:var(--p3)}
+.note p:last-child{margin-bottom:0}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--line);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+th{background:var(--surface-2);text-align:left;font-weight:620;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);padding:11px 14px;border-bottom:1px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+
+/* ---------- checklist ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:22px 0 14px}
+.btn{font:inherit;font-size:.8rem;font-weight:530;padding:7px 13px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){.btn.on{color:#12211c}}
+.btn.ghost{border-style:dashed}
+.btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+
+.group{margin:30px 0 8px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.group h3{margin:0;font-size:.98rem}
+.grouptag{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:99px}
+.t1{background:var(--p1-soft);color:var(--p1)}
+.t2{background:var(--p2-soft);color:var(--p2)}
+.t3{background:var(--p3-soft);color:var(--p3)}
+.groupcount{font-size:.78rem;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-left:auto}
+
+ul.items{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+li.item{display:grid;grid-template-columns:auto 1fr auto;gap:14px;padding:14px 16px;border-bottom:1px solid var(--line);align-items:start;transition:background .15s}
+li.item:last-child{border-bottom:none}
+li.item:hover{background:var(--surface-2)}
+li.item.done{background:color-mix(in srgb,var(--p3-soft) 55%,transparent)}
+li.item.done .title{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
+li.item.hidden{display:none}
+
+.check{appearance:none;-webkit-appearance:none;width:20px;height:20px;margin:2px 0 0;border:1.5px solid var(--ink-3);border-radius:6px;cursor:pointer;flex:none;position:relative;transition:.15s;background:var(--surface)}
+.check:hover{border-color:var(--accent)}
+.check:checked{background:var(--accent);border-color:var(--accent)}
+.check:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.check:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.body{min-width:0}
+.title{font-weight:560;font-size:.95rem;margin-bottom:2px}
+.meta{font-size:.82rem;color:var(--ink-2)}
+.meta a{word-break:break-all}
+.why{font-size:.82rem;color:var(--ink-3);margin-top:3px}
+.noteline{margin-top:8px;width:100%;font:inherit;font-size:.8rem;padding:6px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-family:var(--mono)}
+.noteline::placeholder{color:var(--ink-3);font-family:var(--sans)}
+.noteline:focus{outline:none;border-color:var(--accent)}
+
+.status{font:inherit;font-size:.74rem;font-weight:560;padding:5px 9px;border-radius:99px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);cursor:pointer;flex:none;max-width:140px}
+.status:focus{outline:none;border-color:var(--accent)}
+.status[data-s="Removed – verified"]{background:var(--p3-soft);color:var(--p3);border-color:transparent}
+.status[data-s="Reappeared"]{background:var(--p1-soft);color:var(--p1);border-color:transparent}
+.status[data-s="Submitted"],.status[data-s="Confirmation pending"]{background:var(--p2-soft);color:var(--p2);border-color:transparent}
+
+.bar{height:5px;border-radius:99px;background:var(--line);overflow:hidden;margin:8px 0 0}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .45s ease;width:0}
+
+/* ---------- template block ---------- */
+pre.tmpl{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:18px;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.65;white-space:pre-wrap;color:var(--ink-2)}
+
+/* ---------- misc ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:22px 0}
+.card{border:1px solid var(--line);border-radius:var(--radius);padding:17px;background:var(--surface)}
+.card h4{margin:0 0 5px;font-size:.94rem;font-weight:640}
+.card .price{font-family:var(--mono);font-size:.8rem;color:var(--accent);margin-bottom:8px}
+.card p{font-size:.85rem;color:var(--ink-2);margin:0}
+
+footer{padding:44px 0 70px;color:var(--ink-3);font-size:.83rem}
+footer a{color:var(--ink-2)}
+.srcs{columns:2;column-gap:32px;font-size:.78rem;margin-top:14px}
+.srcs a{display:block;margin-bottom:5px;break-inside:avoid}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:99px;font-size:.85rem;font-weight:520;opacity:0;transition:.3s;z-index:99;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:620px){
+  .wrap{padding:0 18px}
+  header.hero{padding:40px 0 26px}
+  section{padding:40px 0}
+  li.item{grid-template-columns:auto 1fr;gap:11px}
+  .status{grid-column:2;justify-self:start;margin-top:6px}
+  .srcs{columns:1}
+}
+@media print{
+  nav.sticky,.toolbar,.toast,.status{display:none}
+  body{background:#fff;color:#000;font-size:11pt}
+  section{page-break-inside:avoid;border-color:#ccc}
+  li.item.hidden{display:grid}
+  a{color:#000;border:none}
+  .meta a::after{content:" (" attr(href) ")";font-size:.75em;color:#555;word-break:break-all}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Personal privacy · updated July 2026</div>
+    <h1>Take your data off the internet</h1>
+    <p class="lede">A working checklist, ordered by how much exposure each step removes per minute spent. Tick things off as you go — your progress saves in this browser and never leaves your device.</p>
+  </div>
+</header>
+
+<nav class="sticky">
+  <div class="wrap navrow">
+    <a href="#reality">Reality check</a>
+    <a href="#quickstart">Start here</a>
+    <a href="#foundations">Foundations</a>
+    <a href="#brokers">People-search</a>
+    <a href="#aggregators">Aggregators</a>
+    <a href="#accounts">Accounts</a>
+    <a href="#rights">Your rights</a>
+    <a href="#services">Paid services</a>
+    <a href="#upkeep">Upkeep</a>
+    <div class="navspacer"></div>
+    <div class="overall" title="Overall progress">
+      <svg class="ring" viewBox="0 0 32 32"><circle class="bg" cx="16" cy="16" r="13"></circle><circle class="fg" id="ring" cx="16" cy="16" r="13" stroke-dasharray="0 81.7"></circle></svg>
+      <b id="pctText">0%</b><span id="countText">0 / 0</span>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ===================== REALITY ===================== -->
+<section id="reality">
+  <div class="kicker">Before you start</div>
+  <h2>What you can and can't remove</h2>
+  <p class="sub">Being straight about this up front saves you from chasing things that will never come down.</p>
+
+  <h3>Three things are permanently out of reach</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th style="width:30%">Category</th><th>Why it stays</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Public records</strong></td><td>Property deeds, voter registration, court filings, marriage and divorce records, business registrations, professional licences. Public by law. Brokers that <em>republish</em> them can be stopped; the underlying record cannot.</td></tr>
+      <tr><td><strong>Data already sold</strong></td><td>Anything a broker sold before you opted out now lives in someone else's database. Deletion is forward-looking only.</td></tr>
+      <tr><td><strong>Archives and leaks</strong></td><td>The Internet Archive, screenshots, scraped copies, and breach datasets circulating in criminal markets.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note good">
+    <p><strong>What you actually achieve:</strong> you make yourself expensive to look up. Almost every casual search — a nosy colleague, a scam caller, someone with a grudge and no budget — stops at the free tier of people-search sites. Clearing those, plus the wholesalers feeding them, removes the large majority of real-world exposure.</p>
+  </div>
+
+  <div class="note warn">
+    <p><strong>This decays.</strong> Brokers re-scrape the same public sources. Expect some data back within 3–12 months. Everything here needs a repeat cycle — which is the strongest argument for eventually paying someone to do it.</p>
+  </div>
+</section>
+
+<!-- ===================== QUICKSTART ===================== -->
+<section id="quickstart">
+  <div class="kicker">The short version</div>
+  <h2>Five things this week</h2>
+  <p class="sub">If you do nothing else, do these. Ranked by exposure removed per minute spent.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th style="width:6%">#</th><th style="width:34%">Action</th><th style="width:12%">Time</th><th>Why it's here</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Freeze credit at all six bureaus</td><td>60 min</td><td>Free, permanent, and it blocks the actual harm rather than just the visibility.</td></tr>
+      <tr><td>2</td><td>Google "Results about you"</td><td>15 min</td><td>Closes the search path most people genuinely use to find your address.</td></tr>
+      <tr><td>3</td><td>Turn off LinkedIn public indexing</td><td>2 min</td><td>One toggle. Your LinkedIn is probably the top result for your name.</td></tr>
+      <tr><td>4</td><td>Opt out of the top 12 people-search sites</td><td>3 hrs</td><td>Where address, phone, age, and relatives are exposed for free.</td></tr>
+      <tr><td>5</td><td>Suppress at the four big aggregators</td><td>45 min</td><td>They wholesale to everyone else. Cuts off resupply.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="why" style="font-size:.86rem">Everything after that is cleanup and maintenance.</p>
+</section>
+
+<!-- ===================== CHECKLIST SECTIONS (rendered by JS) ===================== -->
+
+<section id="foundations">
+  <div class="kicker">Step 1</div>
+  <h2>Foundations</h2>
+  <p class="sub">Freezes, monitoring, and the two accounts you need to create <em>before</em> touching any opt-out form.</p>
+  <div class="note warn">
+    <p><strong>Set up a throwaway email first.</strong> Many brokers add your opt-out address to their marketing lists. Never use your primary email on these forms, and use a Google Voice number wherever phone verification is required.</p>
+  </div>
+  <div class="bar"><i data-bar="foundations"></i></div>
+  <div class="toolbar">
+    <button class="btn" data-filter="foundations">Hide completed</button>
+  </div>
+  <div data-list="foundations"></div>
+</section>
+
+<section id="brokers">
+  <div class="kicker">Step 2</div>
+  <h2>People-search sites</h2>
+  <p class="sub">The main event. These expose your home address, phone, age, prior addresses, and relatives to anyone who types your name.</p>
+
+  <div class="note">
+    <p><strong>Search yourself on each site first</strong> and paste the profile URL into the note field — most opt-outs require it. Watch for <strong>duplicate listings</strong>: old addresses and name variants often produce two or three profiles per site, and removing one leaves the others live.</p>
+  </div>
+  <div class="note warn">
+    <p><strong>Never pay a people-search site to remove you</strong>, and decline every "premium removal" upsell. Free opt-out is legally required. Never send a photo of your ID to one of these sites.</p>
+  </div>
+
+  <div class="bar"><i data-bar="brokers"></i></div>
+  <div class="toolbar">
+    <button class="btn" data-filter="brokers">Hide completed</button>
+  </div>
+  <div data-list="brokers"></div>
+
+  <div class="note" style="margin-top:26px">
+    <p>Roughly 70 more sites exist below this tier. Maintained lists with current links, better than any static table:
+    <a href="https://privacyinsightsolutions.com/data-broker-opt-out-list" target="_blank" rel="noopener">104-site opt-out index</a> ·
+    <a href="https://www.securityhero.io/how-to-opt-out-of-data-brokers/" target="_blank" rel="noopener">Security Hero step-by-step</a> ·
+    <a href="https://www.cagoldberglaw.com/resources/data-website-opt-outs/" target="_blank" rel="noopener">C.A. Goldberg (victims' rights firm)</a> ·
+    <a href="https://easyoptouts.com/sites" target="_blank" rel="noopener">EasyOptOuts 200+ index</a>.</p>
+  </div>
+</section>
+
+<section id="aggregators">
+  <div class="kicker">Step 3</div>
+  <h2>Upstream aggregators</h2>
+  <p class="sub">The wholesalers. Most people-search sites are retail outlets for this data — suppressing here slows how fast your removed listings come back.</p>
+  <div class="note">
+    <p>Expect these to be slower and more bureaucratic than the retail sites; a few want a mailed form with ID. Worth the friction. If one blows the <strong>45-day statutory deadline</strong>, that's an enforceable violation — file with your state Attorney General.</p>
+  </div>
+  <div class="bar"><i data-bar="aggregators"></i></div>
+  <div class="toolbar">
+    <button class="btn" data-filter="aggregators">Hide completed</button>
+  </div>
+  <div data-list="aggregators"></div>
+</section>
+
+<section id="accounts">
+  <div class="kicker">Step 4</div>
+  <h2>Accounts and social</h2>
+  <p class="sub">Settings you own outright, plus the dormant accounts quietly holding your data until their next breach.</p>
+  <div class="bar"><i data-bar="accounts"></i></div>
+  <div class="toolbar">
+    <button class="btn" data-filter="accounts">Hide completed</button>
+  </div>
+  <div data-list="accounts"></div>
+</section>
+
+<!-- ===================== RIGHTS ===================== -->
+<section id="rights">
+  <div class="kicker">Leverage</div>
+  <h2>Use your legal rights</h2>
+  <p class="sub">Statutory rights most people never invoke. They turn a polite request into a legal obligation with a deadline.</p>
+
+  <div class="note good">
+    <p><strong>In California? Do this before anything else.</strong> <a href="https://privacy.ca.gov/drop" target="_blank" rel="noopener">DROP — the Delete Request and Opt-out Platform</a> has been live since 1 January 2026 under the Delete Act. Create one profile, verify residency, submit <em>one</em> request — and it reaches <strong>all 575+ data brokers registered in California</strong>. Brokers must start honouring requests from 1 August 2026 and check the platform every 45 days. Nothing else in the country comes close. Submit here before paying for any removal service — it may cover most of what you'd be buying.</p>
+  </div>
+
+  <h3>Everywhere else</h3>
+  <p>About 20 states now have comprehensive privacy laws granting a <strong>right to delete</strong>. As of 1 January 2026, twelve states legally require businesses to honour <strong>Global Privacy Control</strong> signals: California, Colorado, Connecticut, Delaware, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon and Texas.</p>
+  <p><a href="https://globalprivacycontrol.org" target="_blank" rel="noopener">Install Global Privacy Control</a> — it's built into Brave, the DuckDuckGo browser, and Firefox (Settings → Privacy → "Tell websites not to sell or share my data"). In those twelve states it's a legally binding opt-out on every site you visit, automatically, forever.</p>
+  <p>The standard response window is <strong>45 days</strong>, extendable once by another 45.</p>
+
+  <h3>Request template</h3>
+  <p>For brokers with no self-service form. Send it from your throwaway address.</p>
+  <pre class="tmpl" id="tmpl">Subject: Consumer Request to Delete and Opt Out of Sale — [YOUR FULL NAME]
+
+To Whom It May Concern:
+
+I am a resident of [STATE]. Pursuant to [CCPA/CPRA — or your state's statute],
+I am exercising my rights to:
+
+  1. Delete all personal information you have collected about me;
+  2. Opt out of the sale and sharing of my personal information;
+  3. Limit the use and disclosure of my sensitive personal information;
+  4. Direct all service providers and third parties to whom you have sold or
+     disclosed my information to do the same.
+
+Identifying information: [full name, any prior or variant names, current
+address, prior addresses, date of birth, phone, email]
+
+Please confirm completion in writing and identify all categories of third
+parties to whom my information was sold or disclosed in the preceding
+12 months.
+
+I expect a response within 45 days as required by law.
+
+[NAME]</pre>
+  <div class="toolbar"><button class="btn" id="copyTmpl">Copy template</button></div>
+
+  <h3>Free registries worth fifteen minutes</h3>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th style="width:34%">Registry</th><th>What it stops</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://www.donotcall.gov" target="_blank" rel="noopener">National Do Not Call Registry</a></td><td>Legitimate telemarketers. Free, two minutes.</td></tr>
+      <tr><td><a href="https://www.optoutprescreen.com" target="_blank" rel="noopener">OptOutPrescreen</a></td><td>Prescreened credit and insurance offers. Choose the permanent option — it needs a mailed form.</td></tr>
+      <tr><td><a href="https://www.dmachoice.org" target="_blank" rel="noopener">DMAchoice</a></td><td>Direct mail. $6 for ten years.</td></tr>
+      <tr><td><a href="https://www.yellowpagesoptout.com" target="_blank" rel="noopener">Yellow Pages opt-out</a></td><td>Printed directories.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services">
+  <div class="kicker">Optional</div>
+  <h2>Should you pay someone?</h2>
+  <p class="sub">Probably yes, if you want the long tail covered and kept clear. With one exception.</p>
+  <div class="note good"><p><strong>If you're in California, submit through DROP first</strong>, wait for the August 2026 processing cycle, then re-audit. You may not need to pay at all.</p></div>
+
+  <div class="cards">
+    <div class="card">
+      <h4>Optery</h4>
+      <div class="price">Free tier · paid from ~$39</div>
+      <p>~390 brokers by default, 640+ on Expanded Reach. The free tier scans and shows you exactly where you appear with before/after screenshots — worth running as a diagnostic even if you never pay. US only.</p>
+    </div>
+    <div class="card">
+      <h4>Incogni</h4>
+      <div class="price">~$7.99/mo · ~$7.19 annual</div>
+      <p>420+ brokers. Cheapest of the majors and the only one with real international coverage under GDPR — one plan spans regions.</p>
+    </div>
+    <div class="card">
+      <h4>DeleteMe</h4>
+      <div class="price">~$10.75/mo</div>
+      <p>Longest-established. Headline figure is 850 sites, but the entry Standard plan automates roughly 85–100; the rest are custom requests. Separate subscription per country.</p>
+    </div>
+    <div class="card">
+      <h4>EasyOptOuts</h4>
+      <div class="price">~$20/year</div>
+      <p>200+ sites. No dashboard, no polish, cheapest thing that exists. It works.</p>
+    </div>
+  </div>
+
+  <div class="note warn">
+    <p><strong>Read reviews sceptically — including the ones linked at the bottom of this page.</strong> Comparison articles in this category are overwhelmingly affiliate-funded, and "expert winner" rankings track commission rates more closely than results. The free-tier scan is the only honest test: run it, see what it actually finds about you, then decide.</p>
+  </div>
+</section>
+
+<!-- ===================== UPKEEP ===================== -->
+<section id="upkeep">
+  <div class="kicker">The part everyone skips</div>
+  <h2>Upkeep</h2>
+  <p class="sub">Doing this once, thoroughly, and never again is the single most common failure. Set the reminders now.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th style="width:26%">Cadence</th><th>Task</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Weekly, first month</strong></td><td>Check the throwaway inbox for confirmation links. Most opt-outs die because a verification email went unclicked.</td></tr>
+      <tr><td><strong>Monthly</strong></td><td>Search your name, name + city, name + employer, your phone number, and your email. Log new hits.</td></tr>
+      <tr><td><strong>Quarterly</strong></td><td>Re-run the tier-one opt-outs. Re-check any service dashboard. Re-check Have I Been Pwned.</td></tr>
+      <tr><td><strong>Annually</strong></td><td>Full sweep — aggregators, confirm freezes are still active, review social settings after policy changes.</td></tr>
+      <tr><td><strong>After any move</strong></td><td>Everything resets. A new address enters public records and propagates within weeks. Run the whole list again.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Stop the resupply</h3>
+  <p>These habits matter more over a year than any single opt-out.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th style="width:24%">Area</th><th>Practice</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Email</strong></td><td>Use aliases for new signups — a real aliasing service (SimpleLogin, Fastmail, Apple Hide My Email, DuckDuckGo Email Protection), not Gmail's <code>+tag</code>, which brokers strip trivially. Keep three tiers: financial/government (never given out), real people, everything else.</td></tr>
+      <tr><td><strong>Phone</strong></td><td>A Google Voice or MySudo number for retail, loyalty schemes, appointments, and deliveries. Your real mobile goes to banks, doctors, and people who know you. This is the biggest single reducer of spam calls, because brokers correlate on phone number more than any other field.</td></tr>
+      <tr><td><strong>Address</strong></td><td>A PO box, UPS Store box, or virtual mailbox for anything not legally required to be your residence. Property records will still show your home; everything downstream doesn't have to.</td></tr>
+      <tr><td><strong>Browser</strong></td><td>Brave or Firefox with GPC enabled, plus uBlock Origin. Stops new collection rather than removing old data — which over a year matters more.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note warn">
+    <p><strong>If someone specific is looking for you</strong>, the order changes: address suppression comes before anything cosmetic, and you shouldn't wait out the 45-day statutory windows. Around 40 states run an <strong>Address Confidentiality Program</strong> for survivors of domestic violence, stalking, sexual assault or trafficking — it gives you a legal substitute address for voter registration, licences, school forms and court filings, and <em>seals the underlying public record</em>, which is otherwise the one layer no opt-out can reach. Administered through your Secretary of State or Attorney General's office. If you qualify, it's worth more than everything else on this page combined. The <a href="https://www.techsafety.org" target="_blank" rel="noopener">Safety Net project at NNEDV</a> has guidance written for exactly this threat model.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="toolbar" style="margin-top:0">
+    <button class="btn" id="exportBtn">Export progress as CSV</button>
+    <button class="btn ghost danger" id="resetBtn">Reset all progress</button>
+  </div>
+  <p style="margin-top:18px">Progress is stored in this browser only, via <code>localStorage</code>. Nothing is uploaded, and there is no analytics or tracking on this page. Clearing your browser data will clear your progress — export the CSV first if that matters.</p>
+  <p>Compiled July 2026. Opt-out URLs and procedures change; if a link 404s, search the site's footer for "Do Not Sell My Personal Information" or "Privacy". Not legal advice.</p>
+  <details style="margin-top:16px">
+    <summary style="cursor:pointer;color:var(--ink-2);font-size:.85rem">Sources</summary>
+    <div class="srcs">
+      <a href="https://www.securityhero.io/how-to-opt-out-of-data-brokers/" target="_blank" rel="noopener">Security Hero — Complete Manual Opt-Out Guide (2026)</a>
+      <a href="https://privacyinsightsolutions.com/data-broker-opt-out-list" target="_blank" rel="noopener">104 US Data Brokers &amp; People-Search Sites</a>
+      <a href="https://stateofsurveillance.org/guides/basic/data-broker-opt-out/" target="_blank" rel="noopener">State of Surveillance — Data Broker Opt-Out Guide 2026</a>
+      <a href="https://www.cagoldberglaw.com/resources/data-website-opt-outs/" target="_blank" rel="noopener">C.A. Goldberg Law — Data Website Opt-Outs</a>
+      <a href="https://support.google.com/websearch/answer/12719076?hl=en" target="_blank" rel="noopener">Google — Find and remove personal info in Search</a>
+      <a href="https://blog.google/feed/results-about-you-new-design/" target="_blank" rel="noopener">Google Blog — Results about you update</a>
+      <a href="https://www.bytebacklaw.com/2026/02/californias-deletion-request-and-opt-out-platform-drop-is-live/" target="_blank" rel="noopener">Byte Back — California's DROP is Live</a>
+      <a href="https://calmatters.org/economy/technology/2026/01/californians-block-personal-data/" target="_blank" rel="noopener">CalMatters — How Californians can block data brokers</a>
+      <a href="https://privacy.ca.gov/2025/12/january-2026-drop-is-coming/" target="_blank" rel="noopener">CalPrivacy — DROP is Coming</a>
+      <a href="https://lawsuitguard.com/insights/state-privacy-gpc-and-opt-out-signals" target="_blank" rel="noopener">LawsuitGuard — State Privacy Patchwork 2026, GPC</a>
+      <a href="https://getcrownedcredit.com/blog/freeze-secondary-credit-bureaus-2026" target="_blank" rel="noopener">Freezing the Secondary Credit Bureaus (2026)</a>
+      <a href="https://www.experian.com/blogs/ask-experian/credit-education/preventing-fraud/security-freeze/" target="_blank" rel="noopener">Experian — Freeze Your Credit at All Three Bureaus</a>
+      <a href="https://www.lexisnexis.com/en-us/privacy/for-consumers/opt-out-of-lexisnexis.page" target="_blank" rel="noopener">LexisNexis — Individual Information Suppression</a>
+      <a href="https://blog.incogni.com/how-to-make-linkedin-private/" target="_blank" rel="noopener">Incogni — How to make LinkedIn private (2026)</a>
+      <a href="https://www.consumerreports.org/electronics/digital-security/how-to-find-old-online-accounts-a1266305698/" target="_blank" rel="noopener">Consumer Reports — How to Find Old Online Accounts</a>
+      <a href="https://cybernews.com/privacy-tools/optery-vs-deleteme-vs-incogni/" target="_blank" rel="noopener">Cybernews — Optery vs DeleteMe vs Incogni (2026)</a>
+      <a href="https://stateofsurveillance.org/guides/basic/data-removal-services-comparison/" target="_blank" rel="noopener">State of Surveillance — Removal Services, July 2026</a>
+      <a href="https://easyoptouts.com/sites" target="_blank" rel="noopener">EasyOptOuts — 200+ broker index</a>
+    </div>
+  </details>
+</footer>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+const STATUSES = ["Not started","Submitted","Confirmation pending","Removed – verified","Reappeared","Blocked / N/A"];
+const DONE = "Removed – verified";
+
+/* ---------------- data ---------------- */
+const DATA = {
+  foundations: [
+    {g:"Do these two first", t:1, items:[
+      {n:"Create a throwaway opt-out email", u:"", w:"Every form below uses it. Brokers add opt-out addresses to marketing lists — never use your real one."},
+      {n:"Get a Google Voice number for verification", u:"https://voice.google.com", w:"Several brokers verify by automated phone call. Don't hand over your real mobile."}
+    ]},
+    {g:"Freeze your credit — all six bureaus", t:1, items:[
+      {n:"Equifax", u:"https://www.equifax.com/personal/credit-report-services/credit-freeze/", w:"Free by federal law. Save the PIN in your password manager."},
+      {n:"Experian", u:"https://www.experian.com/freeze/center.html", w:"Free. Save the PIN."},
+      {n:"TransUnion", u:"https://www.transunion.com/credit-freeze", w:"Free. Save the PIN."},
+      {n:"Innovis", u:"https://www.innovis.com/personal/securityFreeze", w:"The fourth bureau. Commonly missed, used by some lenders."},
+      {n:"NCTUE — telecom & utilities", u:"https://www.nctue.com/consumers", w:"Blocks phone and utility accounts opened in your name."},
+      {n:"ChexSystems — bank accounts", u:"https://www.chexsystems.com/security-freeze/place-freeze", w:"Used by around 80% of banks to screen new checking accounts."}
+    ]},
+    {g:"Search visibility", t:1, items:[
+      {n:"Google — set up “Results about you”", u:"https://myactivity.google.com/results-about-you", w:"Enter every name variant, address, phone and email. Turn on notifications. Since Feb 2026 it also finds government ID numbers."},
+      {n:"LinkedIn — public profile visibility OFF", u:"", w:"Settings & Privacy → Visibility → Edit your public profile. Two minutes, removes you from Google and Bing entirely."},
+      {n:"Google — direct removal request for leftovers", u:"https://support.google.com/websearch/troubleshooter/9685456", w:"Note: delisting hides the result, it does not delete the page. Always pair with a source opt-out."},
+      {n:"Bing content removal", u:"https://www.bing.com/webmasters/tools/contentremoval", w:"DuckDuckGo, Ecosia and Startpage syndicate Bing and Google, so this propagates."}
+    ]},
+    {g:"Legal shortcuts", t:1, items:[
+      {n:"CALIFORNIA ONLY — submit a DROP request", u:"https://privacy.ca.gov/drop", w:"One request covers 575+ registered brokers. Do this before paying for any service."},
+      {n:"Install a Global Privacy Control browser", u:"https://globalprivacycontrol.org", w:"Brave, Firefox or DuckDuckGo. Legally binding opt-out in 12 states as of Jan 2026."}
+    ]},
+    {g:"Free registries", t:2, items:[
+      {n:"National Do Not Call Registry", u:"https://www.donotcall.gov", w:"Two minutes."},
+      {n:"OptOutPrescreen — credit & insurance offers", u:"https://www.optoutprescreen.com", w:"Choose the permanent option; it requires mailing a form."},
+      {n:"DMAchoice — direct mail", u:"https://www.dmachoice.org", w:"$6 for ten years."},
+      {n:"Yellow Pages opt-out", u:"https://www.yellowpagesoptout.com", w:""}
+    ]},
+    {g:"Diagnostics", t:2, items:[
+      {n:"Check breach exposure", u:"https://haveibeenpwned.com", w:"Also surfaces forgotten accounts. Rotate every reused password you find, and turn on 2FA."},
+      {n:"Run Optery's free scan", u:"https://www.optery.com", w:"Shows exactly which sites list you, with screenshots. Useful as a diagnostic even if you never subscribe."}
+    ]},
+    {g:"Longer-term setup", t:3, items:[
+      {n:"Set up an email aliasing service", u:"", w:"SimpleLogin, Fastmail, Apple Hide My Email, or DuckDuckGo. Gmail +tags don't work — brokers strip them."},
+      {n:"Get a PO box or virtual mailbox", u:"", w:"For anything not legally required to use your residence."},
+      {n:"SAFETY: check your state's Address Confidentiality Program", u:"", w:"~40 states. Seals the public record — the one layer no opt-out reaches. Via your Secretary of State or AG's office."}
+    ]}
+  ],
+
+  brokers: [
+    {g:"Tier one — start here", t:1, items:[
+      {n:"Whitepages", u:"https://www.whitepages.com/suppression_requests", w:"Profile URL + phone verification (automated call, 4-digit code) · 1–2 days"},
+      {n:"Spokeo", u:"https://www.spokeo.com/optout", w:"Profile URL + email confirmation · 24–72 hrs"},
+      {n:"BeenVerified", u:"https://www.beenverified.com/app/optout/search", w:"Search, select record, email confirm · 1–7 days"},
+      {n:"Radaris", u:"https://radaris.com/control/privacy", w:"Claim the profile, then remove · 1–3 days"},
+      {n:"Intelius", u:"https://www.intelius.com/opt-out/", w:"Email + confirmation link · 3–7 days"},
+      {n:"TruePeopleSearch", u:"https://www.truepeoplesearch.com/removal", w:"Profile URL + email · minutes to 24 hrs"},
+      {n:"FastPeopleSearch", u:"https://www.fastpeoplesearch.com/removal", w:"Profile URL + email · minutes to 24 hrs"},
+      {n:"PeopleFinders", u:"https://www.peoplefinders.com/opt-out", w:"Name + state, select, email · 2–3 days"},
+      {n:"TruthFinder", u:"https://www.truthfinder.com/opt-out/", w:"Search + email confirm · 2–7 days"},
+      {n:"Nuwber", u:"https://nuwber.com/removal/link", w:"Profile URL + email · 1–3 days"},
+      {n:"USPhoneBook", u:"https://www.usphonebook.com/opt-out", w:"Profile URL + phone · 1–2 days"},
+      {n:"PeopleLooker", u:"https://www.peoplelooker.com/f/optout/search", w:"Search + email · 1–7 days"}
+    ]},
+    {g:"Tier two — second pass", t:2, items:[
+      {n:"Instant Checkmate", u:"https://www.instantcheckmate.com/opt-out/", w:"Search + email confirm"},
+      {n:"SmartBackgroundChecks", u:"https://www.smartbackgroundchecks.com/optoutcheck", w:"Profile URL + email"},
+      {n:"Advanced Background Checks", u:"https://www.advancedbackgroundchecks.com/removal", w:"Profile URL + email"},
+      {n:"CheckPeople", u:"https://www.checkpeople.com/opt-out", w:"Profile URL + email"},
+      {n:"ClustrMaps", u:"https://clustrmaps.com/bl/opt-out", w:"Address-based — check each prior address separately"},
+      {n:"PublicRecordsNow", u:"https://www.publicrecordsnow.com/optout/", w:"Search + confirm"},
+      {n:"USSearch", u:"https://www.ussearch.com/opt-out/", w:"Search + email"},
+      {n:"ZabaSearch", u:"https://www.zabasearch.com/block_records/", w:"Form submission"},
+      {n:"AnyWho", u:"https://www.anywho.com/optout", w:"Profile URL"},
+      {n:"411.com", u:"https://www.411.com/privacy/manage", w:"Profile URL + phone verification"},
+      {n:"Addresses.com", u:"https://www.addresses.com/optout.php", w:"Profile URL"},
+      {n:"NeighborWho", u:"https://www.neighborwho.com/optout-search", w:"Search + email"},
+      {n:"Ownerly", u:"https://www.ownerly.com/optout-search", w:"Search + email"},
+      {n:"PeopleSmart", u:"https://www.peoplesmart.com/optout-search", w:"Search + email"},
+      {n:"SearchPeopleFree", u:"https://www.searchpeoplefree.com/opt-out", w:"Profile URL + email"},
+      {n:"ThatsThem", u:"https://thatsthem.com/optout", w:"Profile URL + email"},
+      {n:"Cyber Background Checks", u:"https://www.cyberbackgroundchecks.com/removal", w:"Profile URL + email"},
+      {n:"Pipl", u:"https://pipl.com/personal-information-removal-request", w:"Form submission"}
+    ]}
+  ],
+
+  aggregators: [
+    {g:"The big five", t:1, items:[
+      {n:"LexisNexis — information suppression", u:"https://optout.lexisnexis.com/", w:"The most important one. Feeds a large share of everything downstream."},
+      {n:"LexisNexis — consumer report security freeze", u:"https://consumer.risk.lexisnexis.com/freeze", w:"Separate process from the suppression request above. Do both."},
+      {n:"Acxiom", u:"https://isapps.acxiom.com/optout/optout.aspx", w:"Also reachable via aboutthedata.com"},
+      {n:"Epsilon", u:"https://legal.epsilon.com/dsr/", w:"Or email optout@epsilon.com"},
+      {n:"Oracle Data Cloud", u:"https://www.oracle.com/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html", w:""}
+    ]},
+    {g:"Second tier", t:2, items:[
+      {n:"CoreLogic", u:"", w:"Email privacy@corelogic.com. Opt-out form downloadable from their privacy page; also offers a security freeze."},
+      {n:"Thomson Reuters CLEAR", u:"https://www.thomsonreuters.com/en/privacy-statement.html", w:"Suppression request form. Law-enforcement-grade database."},
+      {n:"Experian Marketing Services", u:"https://www.experian.com/privacy/opting_out", w:"Separate from the credit freeze."},
+      {n:"Equifax marketing data", u:"https://www.equifax.com/personal/privacy/", w:"Separate from the credit freeze."},
+      {n:"Verisk / ISO — insurance claims history", u:"https://www.verisk.com/legal/consumer-inquiry/", w:""}
+    ]}
+  ],
+
+  accounts: [
+    {g:"LinkedIn", t:1, items:[
+      {n:"Public profile visibility → Off", u:"", w:"Settings → Visibility → Edit your public profile. The single highest-value toggle on this page."},
+      {n:"Profile viewing options → Private mode", u:"", w:"Settings → Visibility"},
+      {n:"Who can see your connections → Only you", u:"", w:"Settings → Visibility"},
+      {n:"Discovery by email and phone → Nobody", u:"", w:"Settings → Visibility"},
+      {n:"Opt out of salary, advertising and research data", u:"", w:"Settings → Data privacy"}
+    ]},
+    {g:"Other platforms", t:2, items:[
+      {n:"Facebook — search engine linking → No", u:"", w:"Settings → Privacy. Also run Privacy Checkup and “Limit Past Posts”."},
+      {n:"X / Twitter — disable email & phone discoverability", u:"", w:"Settings → Privacy → Discoverability"},
+      {n:"Instagram — private account, suggestions off", u:"", w:"Settings → Privacy"},
+      {n:"Venmo — transactions private, hide friends list", u:"", w:"Commonly overlooked. Leaks your social graph and your spending."},
+      {n:"Strava / fitness apps — privacy zones", u:"", w:"Home address is trivially reverse-engineered from run and ride routes."},
+      {n:"Spotify / Goodreads / Letterboxd — private or delete", u:"", w:"Public by default, and surprisingly often under real names."},
+      {n:"Amazon — hide wish lists, disable public profile", u:"", w:"Wish lists are public by default and often reveal a shipping city."},
+      {n:"Google — review third-party app permissions", u:"https://myaccount.google.com/permissions", w:"Revoke anything you don't recognise or no longer use."},
+      {n:"Google — turn off ad personalisation", u:"https://myadcenter.google.com", w:""}
+    ]},
+    {g:"Dormant accounts", t:2, items:[
+      {n:"Search your inbox for signup confirmations", u:"", w:"Try: “welcome to”, “verify your email”, “confirm your account”, “free trial”."},
+      {n:"Run your usernames through WhatsMyName", u:"https://whatsmyname.app", w:"Finds where a handle exists across hundreds of sites."},
+      {n:"Check password manager and browser saved logins", u:"", w:"Usually the most complete record of accounts you've forgotten."},
+      {n:"Delete what you found", u:"https://justdelete.me", w:"Catalogs the deletion route and difficulty for hundreds of services."}
+    ]}
+  ]
+};
+
+/* ---------------- state ---------------- */
+const KEY = "dataRemoval.v1";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e){ state = {}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){ toast("Couldn't save — browser storage is blocked"); } }
+
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+/* ---------------- render ---------------- */
+function render(){
+  Object.keys(DATA).forEach(sec => {
+    const host = document.querySelector('[data-list="'+sec+'"]');
+    if(!host) return;
+    host.innerHTML = DATA[sec].map(group => {
+      const gid = sec+"-"+slug(group.g);
+      const rows = group.items.map(it => {
+        const id = sec+"::"+slug(it.n);
+        const st = (state[id] && state[id].s) || "Not started";
+        const nt = (state[id] && state[id].n) || "";
+        const done = st === DONE;
+        const link = it.u ? '<div class="meta"><a href="'+esc(it.u)+'" target="_blank" rel="noopener noreferrer">'+esc(it.u.replace(/^https?:\/\//,""))+'</a></div>' : "";
+        const why  = it.w ? '<div class="why">'+esc(it.w)+'</div>' : "";
+        const opts = STATUSES.map(s => '<option'+(s===st?" selected":"")+'>'+esc(s)+'</option>').join("");
+        return '<li class="item'+(done?" done":"")+'" data-id="'+esc(id)+'">'+
+          '<input type="checkbox" class="check" '+(done?"checked":"")+' aria-label="Mark '+esc(it.n)+' done">'+
+          '<div class="body"><div class="title">'+esc(it.n)+'</div>'+link+why+
+            '<input class="noteline" placeholder="Profile URL, confirmation number, date, notes…" value="'+esc(nt)+'">'+
+          '</div>'+
+          '<select class="status" data-s="'+esc(st)+'" aria-label="Status">'+opts+'</select>'+
+        '</li>';
+      }).join("");
+      return '<div class="group"><h3>'+esc(group.g)+'</h3>'+
+        '<span class="grouptag t'+group.t+'">Priority '+group.t+'</span>'+
+        '<span class="groupcount" data-gcount="'+gid+'"></span></div>'+
+        '<ul class="items" data-group="'+gid+'">'+rows+'</ul>';
+    }).join("");
+  });
+  recount();
+}
+
+/* ---------------- counting ---------------- */
+function recount(){
+  let allDone = 0, allTotal = 0;
+  Object.keys(DATA).forEach(sec => {
+    let d = 0, t = 0;
+    DATA[sec].forEach(group => {
+      const gid = sec+"-"+slug(group.g);
+      let gd = 0;
+      group.items.forEach(it => {
+        const id = sec+"::"+slug(it.n);
+        const st = (state[id] && state[id].s) || "Not started";
+        t++; if(st === DONE){ d++; gd++; }
+      });
+      const el = document.querySelector('[data-gcount="'+gid+'"]');
+      if(el) el.textContent = gd + " / " + group.items.length;
+    });
+    const bar = document.querySelector('[data-bar="'+sec+'"]');
+    if(bar) bar.style.width = (t ? (d/t*100) : 0) + "%";
+    allDone += d; allTotal += t;
+  });
+  const pct = allTotal ? Math.round(allDone/allTotal*100) : 0;
+  const C = 2 * Math.PI * 13;
+  document.getElementById("ring").setAttribute("stroke-dasharray", (C*pct/100).toFixed(1)+" "+C.toFixed(1));
+  document.getElementById("pctText").textContent = pct + "%";
+  document.getElementById("countText").textContent = allDone + " / " + allTotal;
+}
+
+/* ---------------- interaction ---------------- */
+function setStatus(id, s){
+  state[id] = state[id] || {};
+  state[id].s = s;
+  save();
+}
+
+document.addEventListener("change", e => {
+  const li = e.target.closest("li.item");
+  if(!li) return;
+  const id = li.dataset.id;
+
+  if(e.target.classList.contains("check")){
+    const s = e.target.checked ? DONE : "Not started";
+    setStatus(id, s);
+    const sel = li.querySelector(".status");
+    sel.value = s; sel.dataset.s = s;
+    li.classList.toggle("done", e.target.checked);
+    applyFilters(); recount();
+  }
+
+  if(e.target.classList.contains("status")){
+    const s = e.target.value;
+    setStatus(id, s);
+    e.target.dataset.s = s;
+    const done = s === DONE;
+    li.querySelector(".check").checked = done;
+    li.classList.toggle("done", done);
+    applyFilters(); recount();
+  }
+});
+
+document.addEventListener("input", e => {
+  if(!e.target.classList.contains("noteline")) return;
+  const li = e.target.closest("li.item");
+  const id = li.dataset.id;
+  state[id] = state[id] || {};
+  state[id].n = e.target.value;
+  clearTimeout(e.target._t);
+  e.target._t = setTimeout(save, 400);
+});
+
+/* filters */
+const hidden = {};
+document.querySelectorAll("[data-filter]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const sec = btn.dataset.filter;
+    hidden[sec] = !hidden[sec];
+    btn.classList.toggle("on", hidden[sec]);
+    btn.textContent = hidden[sec] ? "Show all" : "Hide completed";
+    applyFilters();
+  });
+});
+function applyFilters(){
+  Object.keys(DATA).forEach(sec => {
+    const host = document.querySelector('[data-list="'+sec+'"]');
+    if(!host) return;
+    host.querySelectorAll("li.item").forEach(li => {
+      li.classList.toggle("hidden", !!hidden[sec] && li.classList.contains("done"));
+    });
+  });
+}
+
+/* toast */
+let toastTimer;
+function toast(msg){
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+/* copy template */
+document.getElementById("copyTmpl").addEventListener("click", () => {
+  const text = document.getElementById("tmpl").textContent;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(() => toast("Template copied"), () => toast("Copy failed — select it manually"));
+  } else {
+    const ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); toast("Template copied"); } catch(err){ toast("Copy failed"); }
+    document.body.removeChild(ta);
+  }
+});
+
+/* export */
+document.getElementById("exportBtn").addEventListener("click", () => {
+  const q = v => '"' + String(v == null ? "" : v).replace(/"/g,'""') + '"';
+  const lines = ["Section,Group,Item,URL,Status,Notes"];
+  Object.keys(DATA).forEach(sec => {
+    DATA[sec].forEach(group => {
+      group.items.forEach(it => {
+        const id = sec+"::"+slug(it.n);
+        const st = (state[id] && state[id].s) || "Not started";
+        const nt = (state[id] && state[id].n) || "";
+        lines.push([sec, group.g, it.n, it.u, st, nt].map(q).join(","));
+      });
+    });
+  });
+  const blob = new Blob(["﻿" + lines.join("\r\n")], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "data-removal-progress-" + new Date().toISOString().slice(0,10) + ".csv";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast("CSV downloaded");
+});
+
+/* reset */
+document.getElementById("resetBtn").addEventListener("click", () => {
+  if(!confirm("Clear all progress and notes on this page? This cannot be undone — export the CSV first if you want a copy.")) return;
+  state = {};
+  try { localStorage.removeItem(KEY); } catch(e){}
+  render(); applyFilters();
+  toast("Progress cleared");
+});
+
+render();
+})();
+</script>
+</body>
+</html>
